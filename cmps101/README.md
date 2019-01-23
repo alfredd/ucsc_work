@@ -15,3 +15,10 @@ make
 ```sh
 ./sorttester test_resources/testcases.txt test_resources/InsertSortLinkedOutput.txt
 ```
+
+# Sample output:
+```sh
+$ ./sorttester ../test_resources/testcases.txt ../test_resources/InsertSortLinkedOutput.txt 
+
+3 line(s) verified in the file. 2 line(s) contain successfully sorted integers.
+```
