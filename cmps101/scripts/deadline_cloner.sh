@@ -1,14 +1,16 @@
 #!/bin/bash
 argc=$#
 program_name=$0
-function usage_and_exit() {
+function usage_and_exit
+{
 
     if [ "$argc" != "3" ] ;
     then
         echo "Invalid usage. Cannot continue executing the program."
-        echo "usage: $program_name cruzid_list.txt "DEADLINE DateString"
+        echo "usage: $program_name cruzid_list.txt DEADLINE_DateString DEST_BRANCH_NAME"
         echo "      example"
-        echo "          $program_name cruzid_list.txt "\"2019-01-01 23:59:59\""
+        echo "          $program_name cruzid_list.txt \"2019-01-01 23:59:59\""
+        exit 1
     fi
 }
 
@@ -30,8 +32,10 @@ fi
 
 for cruzid in `cat $filename`;
 do
+    cd $git_directory
     echo "Cloning repo for $cruzid" ;
-    git clone git@gitlab.soe.ucsc.edu:cmps101/winter19-01/$cruzid.git ./$git_directory/
-    cd $git_directory/$cruzid
-    git checkout -b $branch_name `git rev-list -1 --before="$datestring" master`
+    git clone git@gitlab.soe.ucsc.edu:cmps101/winter19-01/$cruzid.git
+    cd $cruzid
+    git checkout -b $branch_name `git rev-list -1 --until="$datestring" master`
+    cd ../..
 done
