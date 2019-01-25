@@ -9,7 +9,7 @@ function usage_and_exit() {
         echo "Invalid usage. Cannot continue executing the program."
         echo "usage: $program_name cruzid_list.txt DEADLINE_DateString DEST_BRANCH_NAME"
         echo "      example"
-        echo "          $program_name cruzid_list.txt \"2019-01-01 23:59:59\""
+        echo "          $program_name cruzid_list.txt \"2019-01-01 23:59:59\" pa1"
         exit 1
     fi
 }
