@@ -1,8 +1,8 @@
 #!/bin/bash
 argc=$#
 program_name=$0
-function usage_and_exit
-{
+
+function usage_and_exit() {
 
     if [ "$argc" != "3" ] ;
     then
@@ -29,13 +29,35 @@ then
     echo "File does not exist.";
     usage_and_exit ;
 fi
-
+base_directory=`pwd`
+x=0
 for cruzid in `cat $filename`;
 do
-    cd $git_directory
+
     echo "Cloning repo for $cruzid" ;
-    git clone git@gitlab.soe.ucsc.edu:cmps101/winter19-01/$cruzid.git
-    cd $cruzid
+    cd "$git_directory"
+    git clone git@gitlab.soe.ucsc.edu:cmps101/winter19-01/$cruzid.git > /dev/null 2>&1
+    cd "$cruzid"
     git checkout -b $branch_name `git rev-list -1 --until="$datestring" master`
-    cd ../..
+    x=$(( $x+1 ))
+    cd "$base_directory"
+
 done
+echo "git clone report:"
+echo
+echo "REPORT: Attempted to clone $x repositories under $base_directory/$git_directory"
+echo "Confirming project repositories."
+y=0
+for cruzid in `cat $filename` ;
+do
+    if [[ -d "$git_directory/$cruzid" ]] ;
+    then
+        y=$(( $y+1 ))
+    else
+        echo "project for $cruzid not cloned. Please clone manually by running:"
+        echo "1)    git clone git@gitlab.soe.ucsc.edu:cmps101/winter19-01/$cruzid.git"
+        echo "2)    git checkout -b $branch_name `git rev-list -1 --until="$datestring" master`"
+    fi
+done
+
+echo "Confirmed $y repositories cloned out of $x. All projects are located under $base_directory/$git_directory"
