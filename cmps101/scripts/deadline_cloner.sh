@@ -19,7 +19,7 @@ usage_and_exit
 filename=$1
 datestring=$2
 branch_name=$3
-git_directory="ucsc_gitlab"
+git_directory="cmps101_$branch_name"
 
 echo "Starting git clone-ing. Project repositories will be created under ./$git_directory"
 mkdir -p "$git_directory"
