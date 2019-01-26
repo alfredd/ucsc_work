@@ -55,12 +55,14 @@ void VerifySorted(FILE *unsortedFD, FILE *sortedFD) {
         free(unsortedLine);
         if (out1==-1 || out2==-1)
             break;
+        printf("Verified line %d, sorted? %d (0 means not sorted, 1 means sorted)\n", resultIndex, results[resultIndex]);
+
         resultIndex+=1;
     }
     if(out2!= out1) {
         printf("Mismatch in the number of lines in the input text files.\n");
     }
-    printf("%d line(s) verified in the file. %d line(s) contain successfully sorted integers.\n", resultIndex, CountOnes(results, resultIndex));
+    printf("\n\nRESULTS:\n\t%d line(s) verified in the file. %d line(s) contain successfully sorted integers.\n", resultIndex, CountOnes(results, resultIndex));
 }
 
 int CountOnes(int *array, int index) {
@@ -73,8 +75,10 @@ int CountOnes(int *array, int index) {
 }
 
 int CompareIntegerArrays(int *sa, int n1, int *usa, int n2) {
-    vector<int> v1;
-    v1.assign(usa,usa+n2);
+    vector<int> v1;// = new vector<int>;
+    for (int j = 0; j < n2; ++j) {
+        v1.push_back(usa[j]);
+    }
     sort(v1.begin(), v1.end());
     int status=1;
     for(int i =0;i<n1;i++) {
