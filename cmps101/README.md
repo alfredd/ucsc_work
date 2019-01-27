@@ -1,3 +1,16 @@
+# UPDATE: New script to test sorted files.
+```bash
+python scripts/sorttester.py input.txt output.txt
+
+```
+
+
+
+
+
+# The following program has some bugs which I will fix when I get some time.
+
+
 # Prerequisites
 * g++
 * cmake 2.8 (minimum) OR make
