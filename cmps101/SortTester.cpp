@@ -41,8 +41,8 @@ void VerifySorted(FILE *unsortedFD, FILE *sortedFD) {
 
         int sortedArray[100000] = {0};
         int n1 = GetIntegerArrayFromLine(sortedLine, sortedArray);
-        int *unsortedArray = (int*) malloc(sizeof(int) *n1);
-        bzero(unsortedArray,n1);
+        int unsortedArray [100000] = {0};
+
         out2 = getline(&unsortedLine, &unsortedLength, unsortedFD);
         int n2 = GetIntegerArrayFromLine(unsortedLine, unsortedArray);
         if(n1!=n2) {
@@ -50,7 +50,7 @@ void VerifySorted(FILE *unsortedFD, FILE *sortedFD) {
         } else {
             results[resultIndex]=CompareIntegerArrays(sortedArray, n1,unsortedArray, n2);
         }
-        free(unsortedArray);
+//        free(unsortedArray);
         free(sortedLine);
         free(unsortedLine);
         if (out1==-1 || out2==-1)
