@@ -90,6 +90,7 @@ int CompareIntegerArrays(int *sa, int n1, int *usa, int n2) {
     return status;
 }
 
+/*
 int GetIntegerArrayFromLine(char *sortedLine, int *temp) {
     int n = 0;
     char *found = sortedLine;
@@ -97,6 +98,23 @@ int GetIntegerArrayFromLine(char *sortedLine, int *temp) {
         sscanf(&sortedLine[found - sortedLine], "%d", &temp[n]);
         found = strchr(&sortedLine[(found - sortedLine + 1)], ' ');
         n += 1;
+    }
+    return  n;
+}*/
+
+int GetIntegerArrayFromLine(char *sortedLine, int *temp) {
+    int n = 0;
+    char *found = sortedLine;
+    while (true) {
+
+        char * end = strchr(found, ' ');
+        int value = strtol(found,&end,10);
+        temp[n]=value;
+        found = end+1;
+        n += 1;
+        if (strcmp(end, "\n")==0) {
+            break;
+        }
     }
     return  n;
 }
