@@ -8,16 +8,15 @@
 #include <vector>
 #include <algorithm>
 
+using namespace std;
 
 void VerifySorted(FILE *unsortedFD, FILE *sortedFD);
 
-int GetIntegerArrayFromLine(char *sortedLine, int *temp);
+void GetIntegerArrayFromLine(char *sortedLine,vector<int> *v);
 
-int CompareIntegerArrays(int *sa, int n1, int *usa, int n2);
+int CompareIntegerArrays(vector<int> *v1, vector<int> *v2);
 
 int CountOnes(int *array, int index);
-
-using namespace std;
 
 int main(int argc, char **argv) {
     if (argc != 3) {
@@ -36,23 +35,27 @@ void VerifySorted(FILE *unsortedFD, FILE *sortedFD) {
     while (true) {
         char *sortedLine, *unsortedLine;
         size_t sortedLength, unsortedLength;
-        out1= getline(&sortedLine, &sortedLength, sortedFD);
-
-
-        int sortedArray[100000] = {0};
-        int n1 = GetIntegerArrayFromLine(sortedLine, sortedArray);
-        int unsortedArray [100000] = {0};
-
+        out1 = getline(&sortedLine, &sortedLength, sortedFD);
         out2 = getline(&unsortedLine, &unsortedLength, unsortedFD);
-        int n2 = GetIntegerArrayFromLine(unsortedLine, unsortedArray);
-        if(n1!=n2) {
+
+
+        vector<int> *v1, *v2;
+        v1= new vector<int>;
+        v2= new vector<int>;
+        GetIntegerArrayFromLine(sortedLine, v1);
+
+
+        GetIntegerArrayFromLine(unsortedLine, v2);
+
+        if(v1->size() != v2->size()) {
             results[resultIndex]=0;
         } else {
-            results[resultIndex]=CompareIntegerArrays(sortedArray, n1,unsortedArray, n2);
+            results[resultIndex]=CompareIntegerArrays(v1, v2);
         }
-//        free(unsortedArray);
         free(sortedLine);
         free(unsortedLine);
+        delete v1;
+        delete v2;
         if (out1==-1 || out2==-1)
             break;
         printf("Verified line %d, sorted? %d (0 means not sorted, 1 means sorted)\n", resultIndex, results[resultIndex]);
@@ -74,15 +77,14 @@ int CountOnes(int *array, int index) {
     return ones;
 }
 
-int CompareIntegerArrays(int *sa, int n1, int *usa, int n2) {
-    vector<int> v1;// = new vector<int>;
-    for (int j = 0; j < n2; ++j) {
-        v1.push_back(usa[j]);
-    }
-    sort(v1.begin(), v1.end());
+int CompareIntegerArrays(vector<int> *v1, vector<int> *v2) {
+
+    sort(v2->begin(), v2->end());
+
     int status=1;
-    for(int i =0;i<n1;i++) {
-        if (v1.at(i) != sa[i]) {
+    int i=0;
+    for(i =0;i<v1->size();i++) {
+        if (v1->at(i) !=v2->at(i)) {
             status=0;
             break;
         }
@@ -102,19 +104,15 @@ int GetIntegerArrayFromLine(char *sortedLine, int *temp) {
     return  n;
 }*/
 
-int GetIntegerArrayFromLine(char *sortedLine, int *temp) {
-    int n = 0;
+void GetIntegerArrayFromLine(char *sortedLine,vector<int> *v) {
     char *found = sortedLine;
     while (true) {
-
         char * end = strchr(found, ' ');
         int value = strtol(found,&end,10);
-        temp[n]=value;
+        v->push_back(value);
         found = end+1;
-        n += 1;
         if (strcmp(end, "\n")==0) {
             break;
         }
     }
-    return  n;
 }
