@@ -10,7 +10,6 @@ def getIntegerListFromFile(filepath):
         cnt = 1
         while line:
             n=[]
-            # print("Line {}: {}".format(cnt, line.strip()))
             line = line.strip()
             sn = line.split(" ")
             for i in sn:
