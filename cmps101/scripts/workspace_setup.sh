@@ -2,8 +2,13 @@
 workspace="~/cmps101-grading"
 binaries="~/bin"
 mkdir $binaries -p
+
+mkdir $workspace
 cd $workspace
 workspace=`pwd`
+
+unlink "$binaries/dc.sh"
+unlink "$binaries/isltester"
 
 wget https://github.com/alfredd/ucsc_work/archive/master.zip
 unzip master.zip  -d cmps101_scripts
