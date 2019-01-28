@@ -7,6 +7,8 @@ fi
 
 if [ "$1" == "setup" ] ;
 then
+    echo "Setting up scripts for grading CMPS 101 assignments."
+    sleep 1
 
     cd
     workspace="cmps101-ta"
@@ -43,6 +45,11 @@ then
 
 elif [ "$1" == "clean" ]
 then
-    echo "cleaning"
-
+    echo "Deleting all CMPS 101 grading scripts."
+    cd
+    workspace="cmps101-ta"
+    binaries="bin"
+    unlink "$binaries/dc.sh"
+    unlink "$binaries/isltester"
+    rm $workspace -rf
 fi
