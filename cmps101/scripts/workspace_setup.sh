@@ -39,6 +39,8 @@ then
 
     rm "$workspace/master.zip" -rf
 
+    echo "Scripts are installed under $binaries. Executables are setup under $workspace. Please do not delete this directory."
+
 elif [ "$1" == "clean" ]
 then
     echo "cleaning"
