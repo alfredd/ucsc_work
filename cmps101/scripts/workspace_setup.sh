@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
-workspace="~/cmps101-grading"
-binaries="~/bin"
-mkdir $binaries -p
+cd
+workspace="cmps101-grading"
+binaries="bin"
+mkdir bin -p
+cd $binaries
+binaries=`pwd`
+cd
 
-mkdir $workspace
+mkdir $workspace -p
 cd $workspace
 workspace=`pwd`
 
