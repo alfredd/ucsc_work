@@ -11,7 +11,7 @@ then
     sleep 1
 
     cd
-    workspace="cmps101-ta"
+    workspace=".cmps101-ta"
     binaries="bin"
     mkdir bin -p
     cd $binaries
@@ -50,7 +50,7 @@ elif [ "$1" == "clean" ]
 then
     echo "Deleting all CMPS 101 grading scripts."
     cd
-    workspace="cmps101-ta"
+    workspace=".cmps101-ta"
     binaries="bin"
     unlink "$binaries/dc.sh"
     unlink "$binaries/isltester"
