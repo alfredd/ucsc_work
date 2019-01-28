@@ -9,33 +9,38 @@ if [ "$1" == "setup" ] ;
 then
 
     cd
-    workspace="cmps101-grading"
+    workspace="cmps101-ta"
     binaries="bin"
     mkdir bin -p
     cd $binaries
     binaries=`pwd`
+    unlink "$binaries/dc.sh"
+    unlink "$binaries/isltester"
+
     cd
 
     mkdir $workspace -p
     cd $workspace
     workspace=`pwd`
 
-    unlink "$binaries/dc.sh"
-    unlink "$binaries/isltester"
 
     wget https://github.com/alfredd/ucsc_work/archive/master.zip
-    unzip master.zip  -d cmps101_scripts
+    unzip master.zip  -d scripts
 
 
     cd $workspace
 
-    chmod +x "$workspace/cmps101_scripts/ucsc_work-master/cmps101/scripts/deadline_cloner.sh"
-    ln -s "$workspace/cmps101_scripts/ucsc_work-master/cmps101/scripts/deadline_cloner.sh" "$binaries/dc.sh"
+    chmod +x "$workspace/scripts/ucsc_work-master/cmps101/scripts/deadline_cloner.sh"
+    ln -s "$workspace/scripts/ucsc_work-master/cmps101/scripts/deadline_cloner.sh" "$binaries/dc.sh"
 
 
-    chmod +x "$workspace/cmps101_scripts/ucsc_work-master/cmps101/scripts/sorttester.py"
-    ln -s "$workspace/cmps101_scripts/ucsc_work-master/cmps101/scripts/sorttester.py" "$binaries/isltester"
+    chmod +x "$workspace/scripts/ucsc_work-master/cmps101/scripts/sorttester.py"
+    ln -s "$workspace/scripts/ucsc_work-master/cmps101/scripts/sorttester.py" "$binaries/isltester"
+
+    rm "$workspace/master.zip" -rf
+
 elif [ "$1" == "clean" ]
 then
     echo "cleaning"
+
 fi
