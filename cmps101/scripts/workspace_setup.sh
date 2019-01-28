@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if [ "$#" != "2" ] ;
+if [ "$#" != "" ] ;
 then
     echo "USAGE: $0 setup|clean"
     exit 1
