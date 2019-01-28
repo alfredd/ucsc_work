@@ -48,11 +48,18 @@ then
 
 elif [ "$1" == "clean" ]
 then
+    echo "Deleting all CMPS 101 grading scripts."
     cd
     workspace="cmps101-ta"
     binaries="bin"
     unlink "$binaries/dc.sh"
     unlink "$binaries/isltester"
     rm $workspace -rf
-    echo "Deleted all CMPS 101 grading scripts."
+    echo
+    echo "Unlinked and Deleted: "
+    echo "    $binaries/dc.sh"
+    echo "    $binaries/isltester"
+    echo "    $workspace"
+else
+    echo "USAGE: $0 setup|clean"
 fi
