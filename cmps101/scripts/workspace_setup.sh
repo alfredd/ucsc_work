@@ -41,15 +41,18 @@ then
 
     rm "$workspace/master.zip" -rf
 
+    echo
+    echo "---------------------------------------------------------------------------------"
     echo "Scripts are installed under $binaries. Executables are setup under $workspace. Please do not delete this directory."
+    echo "---------------------------------------------------------------------------------"
 
 elif [ "$1" == "clean" ]
 then
-    echo "Deleting all CMPS 101 grading scripts."
     cd
     workspace="cmps101-ta"
     binaries="bin"
     unlink "$binaries/dc.sh"
     unlink "$binaries/isltester"
     rm $workspace -rf
+    echo "Deleted all CMPS 101 grading scripts."
 fi
